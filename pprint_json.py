@@ -1,5 +1,6 @@
 
 import json
+import os
 
 
 def load_data(filepath):
@@ -12,13 +13,12 @@ def pretty_print_json(data):
 
 
 if __name__ == '__main__':
-    try:
-        filepath = input('Вседите путь и имя файла: ')
-        with open(filepath, 'r') as file_:
-            data = load_data(file_)
-
-    except FileNotFoundError:
+    filepath = input('Вседите путь и имя файла: ')
+    if not os.path.exists(filepath):
         print ('Нет такого файла или папки. Программа будет закрыта.')
         exit()
+    with open(filepath, 'r') as file_:
+        data = load_data(file_)
+
     pprint_json = pretty_print_json(data)
     print (pprint_json)
